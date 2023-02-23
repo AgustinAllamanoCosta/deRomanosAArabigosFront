@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import axios from 'axios';
 import './App.css'
 
 function App() {
@@ -11,8 +12,8 @@ function App() {
       <div className="card">
         <input ref={inputNumber}></input>
         <button onClick={async () =>{
-          fetch(`http://localhost:3012/transformador/romanos/${inputNumber.current.value}`).then(response => response.json())
-          .then(jsondata => {setNumber(jsondata.number)});
+          axios.get(`http://localhost:8080/transformador/romanos/${inputNumber.current.value}`)
+          .then(response => setNumber(response.data.result))
         }}>
           convertir 
         </button>
